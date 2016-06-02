@@ -22,14 +22,26 @@ strategy is produce giant map first. Then cut into tiles and build pyramids.
 - names are basename_yyy_xxx.ers : x and yformatted to three digits (leading 0s).
 - indexes start at 1
 - remove leading 0's
-- ```  for a in */*/*; do b=`echo $a | sed 's/_0*/_/g'`; mv $a $b; done ```
+```  for a in */*/*; do b=`echo $a | sed 's/_0*/_/g'`; mv $a $b; done ```
+-  look into python script to avoid creating leading 0's
 
 4b) populate XYZ hierarchy:
--z/x/y.ers is expected directory structure/namimg
--create global structure for each zoom (or just the needed structure for region, eg. CA)
--populate by copying or linking
--from z0-z/y+1/basename_yyy+1_xxx+1.ers to /z/x/y.ers
-
+- z/x/y.ers is expected directory structure/namimg
+- create global structure for each zoom (or just the needed structure for region, eg. CA)
+- populate by copying or linking
+- from z0-z/y+1/basename_yyy+1_xxx+1.ers to /z/x/y.ers
+``` 
+z0 = 8
+n = "topo30epsg3857z8"
+for z in *;
+  do cd z;
+  for x in *;
+    do cd x;
+    for y in *;
+      ln -s ../../../tiles/$(($z0-$z))/$(($y+1))/${n}_$(($y+1))_$((x+1)) $y.raw
+      done;
+      ...```
+      
 
 
 
