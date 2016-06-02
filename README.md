@@ -30,17 +30,26 @@ strategy is produce giant map first. Then cut into tiles and build pyramids.
 - create global structure for each zoom (or just the needed structure for region, eg. CA)
 - populate by copying or linking
 - from z0-z/y+1/basename_yyy+1_xxx+1.ers to /z/x/y.ers
-``` 
-z0 = 8
-n = "topo30epsg3857z8"
+```
+z0=8
+n="topo30epsg3857z8"
 for z in *;
-  do cd z;
-  for x in *;
-    do cd x;
-    for y in *;
-      ln -s ../../../tiles/$(($z0-$z))/$(($y+1))/${n}_$(($y+1))_$((x+1)) $y.raw
-      done;
-      ...```
+do
+    cd $z;
+    for x in *;
+    do
+        cd $x;
+        for y in *;
+        do
+            ln -s ../../../tiles/$(($z0 - $z))/$(($y + 1))/${n}_$(($y + 1))_$(($x + 1)) $y.raw;
+            base64 -w 0 $y.raw > $y.base64
+            echo $y $x $z
+        done;
+        cd ../;
+    done;
+    cd ../;
+done;
+```
       
 
 
