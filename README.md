@@ -21,7 +21,8 @@ strategy is produce giant map first. Then cut into tiles and build pyramids.
 - second level is Y, so need to rearrange and rename
 - names are basename_yyy_xxx.ers : x and yformatted to three digits (leading 0s).
 - indexes start at 1
-
+- remove leading 0's
+- ```  for a in */*/*; do b=`echo $a | sed 's/_0*/_/g'`; mv $a $b; done ```
 
 4b) populate XYZ hierarchy:
 -z/x/y.ers is expected directory structure/namimg
