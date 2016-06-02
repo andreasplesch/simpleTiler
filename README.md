@@ -14,18 +14,20 @@ strategy is produce giant map first. Then cut into tiles and build pyramids.
 
 3) use gdal_retile to tile and build pyramids
 
-``` gdal ```
+``` gdal_retile.py -v -targetDir tiles -of ERS -ps 256 256 -levels 8 -useDirForEachRow topo30epsg3857z8.ers ```
 
 4) rename directories: 
 - 0 is highest zoom, so rename to highest zoom - dirname
 - second level is Y, so need to rearrange and rename
 - names are basename_yyy_xxx.ers : x and yformatted to three digits (leading 0s).
+- indexes start at 1
+
 
 4b) populate XYZ hierarchy:
 -z/x/y.ers is expected directory structure/namimg
 -create global structure for each zoom (or just the needed structure for region, eg. CA)
 -populate by copying or linking
--from z0-z/y/basename_yyy_xxx.ers to /z/x/y.ers
+-from z0-z/y+1/basename_yyy+1_xxx+1.ers to /z/x/y.ers
 
 
 
